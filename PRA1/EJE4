@@ -1,0 +1,43 @@
+/***********************************************************************************************
+ARCHIVO		: FUNCIONMENORDETRES.JAVA
+FECHA		: 18/08/2025
+DESCRIPCIÓN	: Función que reciba 3 números decimales y devuelva el menor de los 3.
+***********************************************************************************************/
+package practicauno;
+
+import java.util.Scanner;
+
+public class MenordeTres {
+    
+    // Función que recibe 3 decimales y devuelve el menor
+    public static double menor(double a, double b, double c) {
+        double min = a; // asumimos que el menor es 'a'
+        
+        if (b < min) {
+            min = b; // si b es menor que el actual, actualizamos
+        }
+        if (c < min) {
+            min = c; // si c es menor que el actual, actualizamos
+        }
+        
+        return min; // devolvemos el menor de los tres
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Pedimos tres números decimales al usuario
+        System.out.print("Ingrese el primer número: ");
+        double num1 = sc.nextDouble();
+        
+        System.out.print("Ingrese el segundo número: ");
+        double num2 = sc.nextDouble();
+        
+        System.out.print("Ingrese el tercer número: ");
+        double num3 = sc.nextDouble();
+        
+        // Llamamos a la función y mostramos el resultado
+        double resultado = menor(num1, num2, num3);
+        System.out.println("El menor de los tres números es: " + resultado);
+    }
+}
