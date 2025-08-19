@@ -1,33 +1,36 @@
 /*************************************************************************************************
-ARCHIVO		: ARREGLOS.JAVA
-FECHA		: 17/08/2025
-DESCRIPCIÓN	: Programa que permite crear un arreglo de numeros enteros, leerlos y calcular el promedio.
+ARCHIVO     : ARREGLOS.JAVA
+FECHA       : 17/08/2025
+DESCRIPCIÓN : Programa que permite crear un arreglo de numeros enteros, leerlos y calcular el promedio.
 *************************************************************************************************/
-import java.util.Scanner; 
-public class AnalisisArreglo { 
-    public static void main(String[] args) { 
-        Scanner scanner = new Scanner(System.in); 
-        System.out.print("Introduce el tamaño del arreglo: "); 
-        int n = scanner.nextInt(); 
-        int[] arreglo = new int[n]; 
-        System.out.println("Introduce los elementos del arreglo:");
-        leerArreglo(scanner, arreglo); 
-        double promedio = calcularPromedio(arreglo); 
-        System.out.println("El promedio de los elementos es: " 
-promedio); } 
+import java.util.Scanner;
 
-// Función para leer los elementos del arreglo 
-public static void leerArreglo(Scanner scanner, int[] arreglo) 
-{ for (int i = 0; i < arreglo.length; i++) { 
-    arreglo[i] = scanner.nextInt(); 
-    } 
+public class AnalisisArreglo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Introduce el tamaño del arreglo: ");
+        int n = scanner.nextInt();
+        int[] arreglo = new int[n];
+        System.out.println("Introduce los elementos del arreglo:");
+        leerArreglo(scanner, arreglo);
+        double promedio = calcularPromedio(arreglo);
+        System.out.println("El promedio de los elementos es: " + promedio);
+    }
+
+    // Función para leer los elementos del arreglo
+    public static void leerArreglo(Scanner scanner, int[] arreglo) {
+        for (int i = 0; i < arreglo.length; i++) {
+            arreglo[i] = scanner.nextInt();
+        }
+    }
+
+    // Función para calcular el promedio de los elementos del arreglo
+    public static double calcularPromedio(int[] arreglo) {
+        int suma = 0;
+        for (int num : arreglo) {
+            suma += num;
+        }
+        return (double) suma / arreglo.length;
+    }
 }
 
-
-// Función para calcular el promedio de los elementos del arreglo 
-public static double calcularPromedio(int[] arreglo) { 
-    int suma = 0; 
-    for (int num : arreglo) { 
-        suma += num; 
-    } 
-    return (double) suma / arreglo.length; }}
