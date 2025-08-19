@@ -1,0 +1,26 @@
+/*************************************************************************************************
+ARCHIVO     : Dado.java
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en Java que lanza un dado 20 000 veces, guarda la de las 6 caras en un arreglo y se muestra los resultados.
+*************************************************************************************************/
+
+import java.util.Random;
+
+public class Dado {
+    public static void main(String[] args) {
+        Random random = new Random();         // números aleatorios
+        int[] frecuencias = new int[6];       // arreglo de las 6 caras
+        int lanzamientos = 20000;             // cuantas veces se lanzan
+        
+        for (int i = 0; i < lanzamientos; i++) {
+            int resultado = random.nextInt(6); // número entre 0 y 5
+            frecuencias[resultado]++;        
+        }
+
+        // Resultados
+        System.out.println("Frecuencia en " + lanzamientos + " lanzamientos:");
+        for (int i = 0; i < frecuencias.length; i++) {
+            System.out.println("Cara " + (i + 1) + ": " + frecuencias[i]);
+        }
+    }
+}
