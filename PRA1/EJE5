@@ -1,0 +1,38 @@
+/*************************************************************************************************
+ARCHIVO     : Estacionamiento.java
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en Java que calcula el costo de estacionamiento.
+*************************************************************************************************/
+
+import java.util.Scanner;
+
+public class Estacionamiento {
+    
+    public static double SumaHoras(int horas) {
+        double costo;
+        
+        if (horas <= 1) {
+            costo = 3.0;  // Se cobra solo eso si estuvo una hora o menos
+        } else {
+            costo = 3.0 + (horas - 1) * 0.50; // si se queda mas se va aumentando 0.50
+        }
+        
+        if (costo > 12.0) {
+            costo = 12.0; // el cobro maximo 
+        }
+        
+        return costo;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Horas: "); // cuantas horas estuvo 
+        int horas = scanner.nextInt();
+        
+        double total = SumaHoras(horas);
+        System.out.println("El costo del estacionamiento es: S/ " + total); // muestra la suma osea cuanto tiene que pagar 
+        
+        scanner.close();
+    }
+}
