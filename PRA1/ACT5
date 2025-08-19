@@ -1,0 +1,52 @@
+/*************************************************************************************************
+ARCHIVO     : ARREGLO_JAVA.JAVA
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en Java que crea un arreglo con los números {1,2,3,4,5} y los imprime en pantalla.
+*************************************************************************************************/
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+
+        // Imprimir el arreglo
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+
+
+/*************************************************************************************************
+ARCHIVO     : ARREGLO_CPP.CPP
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en C++ que crea un arreglo con los números {1,2,3,4,5} y los imprime en pantalla.
+*************************************************************************************************/
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+
+    // Imprimir el arreglo
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
+"""
+*************************************************************************************************
+ARCHIVO     : ARREGLO_PY.PY
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en Python que crea una lista con los números [1,2,3,4,5] y los imprime en pantalla.
+*************************************************************************************************
+"""
+
+arr = [1, 2, 3, 4, 5]
+
+# Imprimir el arreglo
+for i in arr:
+    print(i, end=" ")
+
