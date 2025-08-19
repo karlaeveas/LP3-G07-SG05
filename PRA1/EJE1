@@ -5,17 +5,16 @@ DESCRIPCIÓN : Programa en Python que permite crear un arreglo de números enter
               suma de todos sus elementos mediante una función y mostrar el resultado en pantalla.
 *************************************************************************************************/
 
-// Se define la funcion
+# Se define la funcion
 def suma(arreglo):
     suma = 0
     for num in arreglo:
-        suma += num // se va sumando a la variable
+        suma += num # se va sumando a la variable
     return suma
 
-// Se realiza un ejemplo para saber cual es la suma de ese arreglo 
+# Se realiza un ejemplo para saber cual es la suma de ese arreglo 
 arreglo = [5, 14, 7]
 print("La suma es:", suma(arreglo))
-
 
 
 /*************************************************************************************************
