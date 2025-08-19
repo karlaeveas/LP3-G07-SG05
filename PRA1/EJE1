@@ -1,4 +1,64 @@
 /*************************************************************************************************
+ARCHIVO     : suma_arreglo.py
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en Python que permite crear un arreglo de números enteros, calcular la 
+              suma de todos sus elementos mediante una función y mostrar el resultado en pantalla.
+*************************************************************************************************/
+
+// Se define la funcion
+def suma(arreglo):
+    suma = 0
+    for num in arreglo:
+        suma += num // se va sumando a la variable
+    return suma
+
+// Se realiza un ejemplo para saber cual es la suma de ese arreglo 
+arreglo = [5, 14, 7]
+print("La suma es:", suma(arreglo))
+
+
+
+/*************************************************************************************************
+ARCHIVO     : SUMAARREGLO.CPP
+FECHA       : 18/08/2025
+DESCRIPCIÓN : Programa en C++ que permite crear un arreglo de números enteros, leerlos desde 
+              teclado y calcular la suma de todos los elementos utilizando una clase.
+*************************************************************************************************/
+#include <iostream>
+using namespace std;
+
+class SumaArreglo {
+public:
+    // calcular la suma de los elementos
+    int Suma(int arreglo[], int n) {
+        int suma = 0;
+        for (int i = 0; i < n; i++) {
+            suma += arreglo[i];
+        }
+        return suma;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Introduce el tamaño del arreglo: ";
+    cin >> n;
+    int arreglo[n]; // Tamaño que se puso en n
+    cout << "Introduce los elementos del arreglo:" << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> arreglo[i];
+    }
+
+    // Se llama a los elementos para asi despues optener un resultado
+    SumaArreglo numero;
+    int resultado = numero.Suma(arreglo, n);
+    cout << "La suma es: " << resultado << endl;
+
+    return 0;
+}
+
+
+/*************************************************************************************************
 ARCHIVO     : SUMAARREGLO.JAVA
 FECHA       : 18/08/2025
 DESCRIPCIÓN : Programa que permite crear un arreglo de números enteros, leerlos desde teclado 
