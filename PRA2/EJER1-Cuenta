@@ -1,0 +1,82 @@
+package ejercicio1;
+
+
+// Clase base abstracta
+abstract class Cuenta {
+    protected String numeroCuenta;
+    protected double saldo;
+
+    public Cuenta(String numeroCuenta, double saldoInicial) {
+        this.numeroCuenta = numeroCuenta;
+        this.saldo = saldoInicial;
+    }
+
+    public void depositar(double monto) {
+        saldo += monto;
+    }
+
+    public void retirar(double monto) {
+        if (saldo >= monto) saldo -= monto;
+        else System.out.println("Fondos insuficientes en " + numeroCuenta);
+    }
+
+    public abstract void consultar();
+
+    @Override
+    public String toString() {
+        return "Cuenta " + numeroCuenta + " - Saldo: S/." + saldo;
+    }
+}
+
+// Subclase: Cuenta de Ahorro
+class CuentaAhorro extends Cuenta {
+    private double tasaInteres;
+    private double saldoMinimo;
+
+    public CuentaAhorro(String numeroCuenta, double saldoInicial, double tasaInteres) {
+        super(numeroCuenta, saldoInicial);
+        this.tasaInteres = tasaInteres;
+        this.saldoMinimo = saldoInicial;
+    }
+
+    @Override
+    public void retirar(double monto) {
+        super.retirar(monto);
+        if (saldo < saldoMinimo) saldoMinimo = saldo;
+    }
+
+    @Override
+    public void consultar() {
+        double interes = saldoMinimo * tasaInteres;
+        depositar(interes);
+        saldoMinimo = saldo;
+        System.out.println("Interes aplicado a " + numeroCuenta + ": " + interes);
+    }
+}
+
+// Subclase: Cuenta Corriente
+class CuentaCorriente extends Cuenta {
+    private int retiros;
+    private static final int MAX_RETIROS = 3;
+    private static final double TARIFA = 3.0;
+
+    public CuentaCorriente(String numeroCuenta, double saldoInicial) {
+        super(numeroCuenta, saldoInicial);
+    }
+
+    @Override
+    public void retirar(double monto) {
+        retiros++;
+        super.retirar(monto);
+        if (retiros > MAX_RETIROS) {
+            super.retirar(TARIFA);
+            System.out.println("Se aplico tarifa extra de S/." + TARIFA + " en " + numeroCuenta);
+        }
+    }
+
+    @Override
+    public void consultar() {
+        retiros = 0; // reinicia retiros
+        System.out.println("Consulta de cuenta corriente: " + numeroCuenta);
+    }
+}
