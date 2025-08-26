@@ -1,0 +1,44 @@
+package practicados;
+
+public class Contador {
+    static int acumulador = 0;
+    final static int VALOR_INICIAL = 10;
+    private int valor;
+
+    // j.1 y j.2
+    static int nContadores = 0;          // número de contadores creados
+    static int ultimoContador = 0;       // valor inicial del último contador creado
+
+    public static int acumulador() {
+        return acumulador;
+    }
+
+    public Contador(int valor) {
+        this.valor = valor;
+        Contador.acumulador += valor;
+        Contador.nContadores++;          // cada vez que se crea uno, se incrementa
+        Contador.ultimoContador = valor; // se guarda el valor inicial
+    }
+
+    public Contador() {
+        this(Contador.VALOR_INICIAL);    // usa el constructor principal
+    }
+
+    public void inc() {
+        this.valor++;
+        acumulador++;
+    }
+
+    public int getValor() {
+        return this.valor;
+    }
+
+    // Métodos de apoyo para ver los nuevos datos
+    public static int getNContadores() {
+        return nContadores;
+    }
+
+    public static int getUltimoContador() {
+        return ultimoContador;
+    }
+}
