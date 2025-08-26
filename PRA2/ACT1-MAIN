@@ -1,1 +1,19 @@
+public class maincoche {
+    public static void main(String[] args) {
+        Coche cocheDeportivo = new Coche("Ferrari", "F8", 2020, 250000);
+        Coche cocheTodoTerreno = new Coche("Toyota", "Land Cruiser", 2015, 80000);
+
+        System.out.println("=== Deportivo ===");
+        cocheDeportivo.encender();
+        cocheDeportivo.acelerar(60);
+        cocheDeportivo.frenar(30);
+        cocheDeportivo.apagar();
+
+        System.out.println("\n=== Todo Terreno ===");
+        cocheTodoTerreno.encender();
+        cocheTodoTerreno.acelerar(40);
+        cocheTodoTerreno.frenar(15);
+        cocheTodoTerreno.apagar();
+    }
+}
 
