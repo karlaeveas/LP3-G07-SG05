@@ -27,7 +27,26 @@ public class Coche {
         this.velocidad = 0;
     }
 
-    // Método aplicarDescuento
+    // ================== Getters y Setters ==================
+    public String getMarca() { return marca; }
+    public void setMarca(String marca) { this.marca = marca; }
+
+    public String getModelo() { return modelo; }
+    public void setModelo(String modelo) { this.modelo = modelo; }
+
+    public int getAñoFabricacion() { return añoFabricacion; }
+    public void setAñoFabricacion(int añoFabricacion) { this.añoFabricacion = añoFabricacion; }
+
+    public double getPrecio() { return precio; }
+    public void setPrecio(double precio) { this.precio = precio; }
+
+    public boolean isEncendido() { return encendido; }
+    public void setEncendido(boolean encendido) { this.encendido = encendido; }
+
+    public int getVelocidad() { return velocidad; }
+    public void setVelocidad(int velocidad) { this.velocidad = velocidad; }
+
+    // ================== Métodos ==================
     public boolean aplicarDescuento(double descuento) {
         if (añoFabricacion < 2010) {
             precio -= precio * descuento; 
@@ -36,7 +55,6 @@ public class Coche {
         return false; 
     }
 
-    // Encender coche
     public void encender() {
         if (!encendido) {
             encendido = true;
@@ -46,7 +64,6 @@ public class Coche {
         }
     }
 
-    // Apagar coche
     public void apagar() {
         if (encendido) {
             encendido = false;
@@ -57,7 +74,6 @@ public class Coche {
         }
     }
 
-    // Acelerar coche
     public void acelerar(int incremento) {
         if (encendido) {
             velocidad += incremento;
@@ -67,7 +83,6 @@ public class Coche {
         }
     }
 
-    // Frenar coche
     public void frenar(int decremento) {
         if (encendido && velocidad > 0) {
             velocidad -= decremento;
@@ -78,12 +93,13 @@ public class Coche {
         }
     }
 
-    // Mostrar información
     public void mostrarInfo() {
         System.out.println("Marca: " + marca);
         System.out.println("Modelo: " + modelo);
         System.out.println("Año de fabricación: " + añoFabricacion);
         System.out.println("Precio: " + precio);
+        System.out.println("Encendido: " + (encendido ? "Sí" : "No"));
+        System.out.println("Velocidad actual: " + velocidad + " km/h");
     }
 }
 
