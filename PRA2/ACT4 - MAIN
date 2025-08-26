@@ -1,0 +1,14 @@
+package App;
+
+public class AppMain {
+    public static void main(String[] args) {
+        Persona p1 = new Persona(1, "Juan", "Pérez", 1001);
+        Persona p2 = new Persona(2, "María", "García", 1002);
+
+        p1.getCuenta().setSaldo(500.75);
+        p2.getCuenta().setSaldo(1200.00);
+
+        System.out.println(p1);
+        System.out.println(p2);
+    }
+}
