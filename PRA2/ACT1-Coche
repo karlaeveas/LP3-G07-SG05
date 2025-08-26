@@ -1,1 +1,89 @@
+public class Coche {
+    // Atributos
+    private String marca;
+    private String modelo;
+    private int añoFabricacion;
+    private double precio;
+    private boolean encendido;
+    private int velocidad;
+
+    // Constructor por defecto
+    public Coche() {
+        this.marca = "Desconocida";
+        this.modelo = "Genérico";
+        this.añoFabricacion = 2000;
+        this.precio = 10000.0;
+        this.encendido = false;
+        this.velocidad = 0;
+    }
+
+    // Constructor con parámetros
+    public Coche(String marca, String modelo, int añoFabricacion, double precio) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.añoFabricacion = añoFabricacion;
+        this.precio = precio;
+        this.encendido = false;
+        this.velocidad = 0;
+    }
+
+    // Método aplicarDescuento
+    public boolean aplicarDescuento(double descuento) {
+        if (añoFabricacion < 2010) {
+            precio -= precio * descuento; 
+            return true;  
+        }
+        return false; 
+    }
+
+    // Encender coche
+    public void encender() {
+        if (!encendido) {
+            encendido = true;
+            System.out.println(modelo + " está encendido.");
+        } else {
+            System.out.println(modelo + " ya estaba encendido.");
+        }
+    }
+
+    // Apagar coche
+    public void apagar() {
+        if (encendido) {
+            encendido = false;
+            velocidad = 0;
+            System.out.println(modelo + " se apagó.");
+        } else {
+            System.out.println(modelo + " ya estaba apagado.");
+        }
+    }
+
+    // Acelerar coche
+    public void acelerar(int incremento) {
+        if (encendido) {
+            velocidad += incremento;
+            System.out.println(modelo + " acelera a " + velocidad + " km/h.");
+        } else {
+            System.out.println(modelo + " no puede acelerar porque está apagado.");
+        }
+    }
+
+    // Frenar coche
+    public void frenar(int decremento) {
+        if (encendido && velocidad > 0) {
+            velocidad -= decremento;
+            if (velocidad < 0) velocidad = 0;
+            System.out.println(modelo + " frena a " + velocidad + " km/h.");
+        } else {
+            System.out.println(modelo + " no puede frenar porque está apagado o ya está detenido.");
+        }
+    }
+
+    // Mostrar información
+    public void mostrarInfo() {
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Año de fabricación: " + añoFabricacion);
+        System.out.println("Precio: " + precio);
+    }
+}
 
