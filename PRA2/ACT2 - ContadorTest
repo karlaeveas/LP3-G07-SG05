@@ -1,0 +1,25 @@
+package practicados;
+
+public class ContadorTest {
+
+    public static void main(String[] args) {
+        System.out.println("Acumulador inicial: " + Contador.acumulador());
+        System.out.println("Número de contadores: " + Contador.getNContadores());
+
+        Contador c1 = new Contador(5);
+        Contador c2 = new Contador(20);
+        Contador c3 = new Contador(); // este se crea con VALOR_INICIAL = 10
+
+        c1.inc();
+        c2.inc();
+        c3.inc();
+
+        System.out.println("Valor c1: " + c1.getValor());
+        System.out.println("Valor c2: " + c2.getValor());
+        System.out.println("Valor c3: " + c3.getValor());
+
+        System.out.println("Acumulador final: " + Contador.acumulador());
+        System.out.println("Número de contadores creados: " + Contador.getNContadores());
+        System.out.println("Último valor inicial de contador: " + Contador.getUltimoContador());
+    }
+}
