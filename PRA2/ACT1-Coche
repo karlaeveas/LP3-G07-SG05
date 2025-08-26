@@ -2,7 +2,7 @@ public class Coche {
     // Atributos
     private String marca;
     private String modelo;
-    private int añoFabricacion;
+    private int anoFabricacion;
     private double precio;
     private boolean encendido;
     private int velocidad;
@@ -11,30 +11,30 @@ public class Coche {
     public Coche() {
         this.marca = "Desconocida";
         this.modelo = "Genérico";
-        this.añoFabricacion = 2000;
+        this.anoFabricacion = 2000;
         this.precio = 10000.0;
         this.encendido = false;
         this.velocidad = 0;
     }
 
     // Constructor con parámetros
-    public Coche(String marca, String modelo, int añoFabricacion, double precio) {
+    public Coche(String marca, String modelo, int anoFabricacion, double precio) {
         this.marca = marca;
         this.modelo = modelo;
-        this.añoFabricacion = añoFabricacion;
+        this.anoFabricacion = añoFabricacion;
         this.precio = precio;
         this.encendido = false;
         this.velocidad = 0;
     }
 
-    // ================== Getters y Setters ==================
+    
     public String getMarca() { return marca; }
     public void setMarca(String marca) { this.marca = marca; }
 
     public String getModelo() { return modelo; }
     public void setModelo(String modelo) { this.modelo = modelo; }
 
-    public int getAñoFabricacion() { return añoFabricacion; }
+    public int getAnoFabricacion() { return anoFabricacion; }
     public void setAñoFabricacion(int añoFabricacion) { this.añoFabricacion = añoFabricacion; }
 
     public double getPrecio() { return precio; }
@@ -46,7 +46,7 @@ public class Coche {
     public int getVelocidad() { return velocidad; }
     public void setVelocidad(int velocidad) { this.velocidad = velocidad; }
 
-    // ================== Métodos ==================
+    // METODOS
     public boolean aplicarDescuento(double descuento) {
         if (añoFabricacion < 2010) {
             precio -= precio * descuento; 
@@ -58,7 +58,7 @@ public class Coche {
     public void encender() {
         if (!encendido) {
             encendido = true;
-            System.out.println(modelo + " está encendido.");
+            System.out.println(modelo + " esta encendido.");
         } else {
             System.out.println(modelo + " ya estaba encendido.");
         }
@@ -68,7 +68,7 @@ public class Coche {
         if (encendido) {
             encendido = false;
             velocidad = 0;
-            System.out.println(modelo + " se apagó.");
+            System.out.println(modelo + " se apago.");
         } else {
             System.out.println(modelo + " ya estaba apagado.");
         }
@@ -96,9 +96,9 @@ public class Coche {
     public void mostrarInfo() {
         System.out.println("Marca: " + marca);
         System.out.println("Modelo: " + modelo);
-        System.out.println("Año de fabricación: " + añoFabricacion);
+        System.out.println("Ano de fabricacion: " + añoFabricacion);
         System.out.println("Precio: " + precio);
-        System.out.println("Encendido: " + (encendido ? "Sí" : "No"));
+        System.out.println("Encendido: " + (encendido ? "Si" : "No"));
         System.out.println("Velocidad actual: " + velocidad + " km/h");
     }
 }
