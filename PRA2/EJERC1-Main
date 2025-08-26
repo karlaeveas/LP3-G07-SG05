@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class BancoTest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Creamos dos cuentas de prueba
+        Cuenta cuentaAhorro = new CuentaAhorro("A001", 1000, 0.02);
+        Cuenta cuentaCorriente = new CuentaCorriente("C001", 2000);
+
+        int opcion;
+        do {
+            System.out.println("\n===== MENU BANCO =====");
+            System.out.println("1. Depositar en cuenta de ahorro");
+            System.out.println("2. Retirar de cuenta de ahorro");
+            System.out.println("3. Consultar cuenta de ahorro");
+            System.out.println("4. Depositar en cuenta corriente");
+            System.out.println("5. Retirar de cuenta corriente");
+            System.out.println("6. Consultar cuenta corriente");
+            System.out.println("7. Mostrar saldos");
+            System.out.println("0. Salir");
+            System.out.print("Elige una opcion: ");
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Monto a depositar: ");
+                    cuentaAhorro.depositar(sc.nextDouble());
+                    break;
+                case 2:
+                    System.out.print("Monto a retirar: ");
+                    cuentaAhorro.retirar(sc.nextDouble());
+                    break;
+                case 3:
+                    cuentaAhorro.consultar();
+                    break;
+                case 4:
+                    System.out.print("Monto a depositar: ");
+                    cuentaCorriente.depositar(sc.nextDouble());
+                    break;
+                case 5:
+                    System.out.print("Monto a retirar: ");
+                    cuentaCorriente.retirar(sc.nextDouble());
+                    break;
+                case 6:
+                    cuentaCorriente.consultar();
+                    break;
+                case 7:
+                    System.out.println(cuentaAhorro);
+                    System.out.println(cuentaCorriente);
+                    break;
+                case 0:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("Opcion invalida.");
+            }
+        } while (opcion != 0);
+
+        sc.close();
+    }
+}
