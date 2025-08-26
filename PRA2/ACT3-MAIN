@@ -1,0 +1,14 @@
+public class TestAgregacion {
+    public static void main(String[] args) {
+
+        Motor motor1 = new Motor("V8", 500);
+        Motor motor2 = new Motor("Eléctrico", 250);
+
+      
+        Automovil auto1 = new Automovil("Ford", "Mustang", 2022, motor1);
+        Automovil auto2 = new Automovil("Tesla", "Model S", 2023, motor2);
+
+        System.out.println(auto1);
+        System.out.println(auto2);
+    }
+}
