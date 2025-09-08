@@ -1,0 +1,27 @@
+package experiencia2;
+
+import java.time.LocalDate;
+
+public class Reserva {
+    private String cliente;
+    private LocalDate fechaCheckIn;
+    private LocalDate fechaReserva;
+    private PoliticaCancelacion politica; // nueva relación
+
+    public Reserva(String cliente, LocalDate fechaCheckIn, LocalDate fechaReserva, PoliticaCancelacion politica) {
+        this.cliente = cliente;
+        this.fechaCheckIn = fechaCheckIn;
+        this.fechaReserva = fechaReserva;
+        this.politica = politica;
+    }
+
+    // Método de cancelación ahora depende de la política elegida
+    public boolean cancelar() {
+        return politica.puedeCancelar(this);
+    }
+
+    // Getters
+    public String getCliente() { return cliente; }
+    public LocalDate getFechaCheckIn() { return fechaCheckIn; }
+    public LocalDate getFechaReserva() { return fechaReserva; }
+}
