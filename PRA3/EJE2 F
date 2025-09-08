@@ -1,0 +1,6 @@
+package ejercicio2;
+
+public abstract class Forma {
+	// Método abstracto: cada subclase lo implementa a su manera
+    public abstract void dibujar();
+}
