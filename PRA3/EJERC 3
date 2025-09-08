@@ -1,0 +1,29 @@
+package ejercicio3;
+
+class Vehiculo {
+    public void acelerar() {
+        System.out.println("El vehículo acelera.");
+    }
+}
+class Coche extends Vehiculo {
+    @Override
+    public void acelerar() {
+        System.out.println(" El coche acelera usando el motor.");
+    }
+}
+class Bicicleta extends Vehiculo {
+    @Override
+    public void acelerar() {
+        System.out.println(" La bicicleta acelera pedaleando.");
+    }
+}
+public class main {
+    public static void main(String[] args) {
+        Vehiculo v1 = new Coche();
+        Vehiculo v2 = new Bicicleta();
+
+        System.out.println("=== PRUEBA DE LSP ===");
+        v1.acelerar(); // "El coche acelera usando el motor."
+        v2.acelerar(); // "La bicicleta acelera pedaleando."
+    }
+}
