@@ -1,0 +1,19 @@
+package experiencia1;
+
+public class Main {
+    public static void main(String[] args) {
+        Habitacion h1 = new Habitacion(101, "Suite", 150);
+
+        // Consultar disponibilidad
+        System.out.println("Disponible: " + h1.verificarDisponibilidad("2025-09-07"));
+
+        // Reservar habitación
+        h1.reservar();
+        System.out.println("Después de reservar: Disponible = " + h1.isDisponible());
+
+        // Liberar habitación
+        h1.liberar();
+        System.out.println("Después de liberar: Disponible = " + h1.isDisponible());
+    }
+}
+
