@@ -1,0 +1,39 @@
+package experiencia1;
+
+public class Habitacion {
+    private int numero;
+    private String tipo;
+    private boolean disponible;
+    private double precioBase;
+
+    // Relación con el gestor de disponibilidad
+    private GestorDisponibilidadHabitacion gestorDisponibilidad;
+
+    public Habitacion(int numero, String tipo, double precioBase) {
+        this.numero = numero;
+        this.tipo = tipo;
+        this.precioBase = precioBase;
+        this.disponible = true;
+        this.gestorDisponibilidad = new GestorDisponibilidadHabitacion();
+    }
+
+    // Métodos delegados al gestor
+    public boolean verificarDisponibilidad(String fecha) {
+        return gestorDisponibilidad.verificarDisponibilidad(this, fecha);
+    }
+
+    public void reservar() {
+        gestorDisponibilidad.reservar(this);
+    }
+
+    public void liberar() {
+        gestorDisponibilidad.liberar(this);
+    }
+
+    // Getters y setters
+    public int getNumero() { return numero; }
+    public String getTipo() { return tipo; }
+    public boolean isDisponible() { return disponible; }
+    public void setDisponible(boolean disponible) { this.disponible = disponible; }
+    public double getPrecioBase() { return precioBase; }
+}
