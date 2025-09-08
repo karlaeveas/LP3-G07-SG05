@@ -1,0 +1,42 @@
+package experiencia2;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Simulación de ingreso de datos
+        System.out.print("Ingrese nombre del cliente: ");
+        String cliente = sc.nextLine();
+
+        LocalDate fechaReserva = LocalDate.now();
+        LocalDate fechaCheckIn = fechaReserva.plusDays(2); // check-in en 2 días
+
+        // Selección de política de cancelación
+        System.out.println("Seleccione política de cancelación:");
+        System.out.println("1. Flexible (24h antes)");
+        System.out.println("2. Moderada (72h antes, 50% penalización)");
+        System.out.println("3. Estricta (no se puede cancelar)");
+        int opcion = sc.nextInt();
+
+        PoliticaCancelacion politica;
+        switch (opcion) {
+            case 1: politica = new PoliticaCancelacionFlexible(); break;
+            case 2: politica = new PoliticaCancelacionModerada(); break;
+            default: politica = new PoliticaCancelacionEstricta(); break;
+        }
+
+        // Crear la reserva con la política seleccionada
+        Reserva reserva = new Reserva(cliente, fechaCheckIn, fechaReserva, politica);
+
+        // Intentar cancelar
+        System.out.println("¿Desea cancelar la reserva? (s/n): ");
+        char cancelar = sc.next().charAt(0);
+        if (cancelar == 's') {
+            boolean resultado = reserva.cancelar();
+            System.out.println("Resultado cancelación: " + resultado);
+        }
+    }
+}
