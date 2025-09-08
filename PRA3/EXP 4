@@ -1,0 +1,151 @@
+package hotel;
+
+import java.util.*;
+
+interface ServicioLimpieza {
+    void solicitarLimpieza();
+}
+
+interface ServicioComida {
+    void solicitarComida(String menu);
+}
+
+interface ServicioLavanderia {
+    void solicitarLavanderia(String prenda);
+}
+
+// Clase base
+abstract class Habitacion {
+    protected String id;
+    protected boolean ocupada;
+    protected double precio;
+
+    public Habitacion(String id, double precio) {
+        this.id = id;
+        this.precio = precio;
+        this.ocupada = false;
+    }
+
+    public abstract String getDescripcion();
+
+    public void ocupar() {
+        ocupada = true;
+    }
+
+    public void liberar() {
+        ocupada = false;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + getDescripcion() + " - " + (ocupada ? "Ocupada" : "Libre") + " - $" + precio;
+    }
+}
+
+// Subclases con servicios según corresponda
+class HabitacionIndividual extends Habitacion implements ServicioLimpieza {
+    public HabitacionIndividual(String id, double precio) {
+        super(id, precio);
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Habitación Individual";
+    }
+
+    @Override
+    public void solicitarLimpieza() {
+        System.out.println("✅ Limpieza solicitada para habitación individual " + id);
+    }
+}
+
+class HabitacionDoble extends Habitacion implements ServicioLimpieza, ServicioComida {
+    private boolean camaExtra;
+
+    public HabitacionDoble(String id, double precio, boolean camaExtra) {
+        super(id, precio);
+        this.camaExtra = camaExtra;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Habitación Doble" + (camaExtra ? " con cama extra" : "");
+    }
+
+    @Override
+    public void solicitarLimpieza() {
+        System.out.println("✅ Limpieza solicitada para habitación doble " + id);
+    }
+
+    @Override
+    public void solicitarComida(String menu) {
+        System.out.println("🍽️ Comida '" + menu + "' solicitada para habitación doble " + id);
+    }
+}
+
+class Suite extends Habitacion implements ServicioLimpieza, ServicioComida, ServicioLavanderia {
+    private boolean jacuzzi;
+
+    public Suite(String id, double precio, boolean jacuzzi) {
+        super(id, precio);
+        this.jacuzzi = jacuzzi;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Suite" + (jacuzzi ? " con jacuzzi" : "");
+    }
+
+    @Override
+    public void solicitarLimpieza() {
+        System.out.println("✅ Limpieza solicitada para suite " + id);
+    }
+
+    @Override
+    public void solicitarComida(String menu) {
+        System.out.println("🍽️ Comida '" + menu + "' solicitada para suite " + id);
+    }
+
+    @Override
+    public void solicitarLavanderia(String prenda) {
+        System.out.println("👕 Lavandería solicitada para '" + prenda + "' en suite " + id);
+    }
+}
+
+// Controlador principal
+public class Main {
+    public static void main(String[] args) {
+        List<Habitacion> habitaciones = new ArrayList<>();
+
+        // Crear habitaciones
+        habitaciones.add(new HabitacionIndividual("H1", 50));
+        habitaciones.add(new HabitacionDoble("H2", 80, true));
+        habitaciones.add(new Suite("H3", 150, true));
+
+        // Mostrar habitaciones
+        System.out.println("=== LISTA DE HABITACIONES ===");
+        for (Habitacion h : habitaciones) {
+            System.out.println(h);
+        }
+
+        // Probar servicios usando polimorfismo
+        System.out.println("\n=== PRUEBA DE SERVICIOS ===");
+        for (Habitacion h : habitaciones) {
+            System.out.println("\n➡️ Servicios disponibles para " + h.getDescripcion() + " (" + h.getId() + "):");
+
+            if (h instanceof ServicioLimpieza limpieza) {
+                limpieza.solicitarLimpieza();
+            }
+            if (h instanceof ServicioComida comida) {
+                comida.solicitarComida("Pizza margarita");
+            }
+            if (h instanceof ServicioLavanderia lavanderia) {
+                lavanderia.solicitarLavanderia("Camisa blanca");
+            }
+        }
+    }
+}
