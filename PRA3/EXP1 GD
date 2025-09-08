@@ -1,0 +1,21 @@
+package experiencia1;
+
+//Clase encargada SOLO de gestionar la disponibilidad
+public class GestorDisponibilidadHabitacion {
+ 
+ // Verificar disponibilidad de una habitación
+ public boolean verificarDisponibilidad(Habitacion habitacion, String fecha) {
+     // En un sistema real: consultar reservas
+     return habitacion.isDisponible();
+ }
+
+ // Reservar la habitación
+ public void reservar(Habitacion habitacion) {
+     habitacion.setDisponible(false);
+ }
+
+ // Liberar la habitación
+ public void liberar(Habitacion habitacion) {
+     habitacion.setDisponible(true);
+ }
+}
