@@ -1,0 +1,13 @@
+package ejercicio1;
+
+public class Main {
+    public static void main(String[] args) {
+        // salario ahora es mensual
+        Empleado e1 = new Empleado("Carlos", 2000, "TI");
+
+        CalcularPago calculadora = new CalcularPago();
+
+        System.out.println("Pago mensual de " + e1.getNombre() + ": " + calculadora.pagoMensual(e1));
+        System.out.println("Pago anual de " + e1.getNombre() + ": " + calculadora.pagoAnual(e1));
+    }
+}
