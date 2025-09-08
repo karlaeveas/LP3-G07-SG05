@@ -1,0 +1,63 @@
+package hotel;
+
+// a) INTERFAZ: abstrae el canal de notificación
+interface CanalNotificacion {
+    void enviarNotificacion(String mensaje);
+}
+
+// b) IMPLEMENTACIONES CONCRETAS
+class EnviadorCorreo implements CanalNotificacion {
+    @Override
+    public void enviarNotificacion(String mensaje) {
+        System.out.println("📧 Correo enviado: " + mensaje);
+    }
+}
+
+class EnviadorSMS implements CanalNotificacion {
+    @Override
+    public void enviarNotificacion(String mensaje) {
+        System.out.println("📱 SMS enviado: " + mensaje);
+    }
+}
+
+class NotificadorSlack implements CanalNotificacion {
+    @Override
+    public void enviarNotificacion(String mensaje) {
+        System.out.println("💬 Notificación Slack: " + mensaje);
+    }
+}
+
+// c) NOTIFICADOR RESERVA (usa inyección de dependencias)
+class NotificadorReserva {
+    private CanalNotificacion canal;
+
+    // Inyección por constructor
+    public NotificadorReserva(CanalNotificacion canal) {
+        this.canal = canal;
+    }
+
+    public void notificar(String mensaje) {
+        canal.enviarNotificacion(mensaje);
+    }
+}
+
+// d) CONTROLADOR PRINCIPAL
+public class Main {
+    public static void main(String[] args) {
+        // Podemos elegir el canal de notificación
+        CanalNotificacion correo = new EnviadorCorreo();
+        CanalNotificacion sms = new EnviadorSMS();
+        CanalNotificacion slack = new NotificadorSlack();
+
+        // Inyectamos el canal en el notificador
+        NotificadorReserva notificadorCorreo = new NotificadorReserva(correo);
+        NotificadorReserva notificadorSMS = new NotificadorReserva(sms);
+        NotificadorReserva notificadorSlack = new NotificadorReserva(slack);
+
+        // Simulación de reservas
+        System.out.println("=== PRUEBA DE NOTIFICACIONES ===");
+        notificadorCorreo.notificar("Reserva confirmada para la habitación 101.");
+        notificadorSMS.notificar("Check-in mañana a las 14:00 para habitación 202.");
+        notificadorSlack.notificar("Nueva reserva registrada en el sistema.");
+    }
+}
