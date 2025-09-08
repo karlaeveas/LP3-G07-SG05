@@ -1,0 +1,14 @@
+package ejercicio1;
+
+public class CalcularPago {
+
+    // Retorna el salario mensual
+    public double pagoMensual(Empleado empleado) {
+        return empleado.getSalario();
+    }
+
+    // Retorna el salario anual
+    public double pagoAnual(Empleado empleado) {
+        return empleado.getSalario() * 12;
+    }
+}
