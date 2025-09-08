@@ -1,0 +1,17 @@
+package ejercicio2;
+
+public class Main {
+    public static void main(String[] args) {
+        // Un array con diferentes formas (polimorfismo)
+        Forma[] formas = {
+            new Circulo(),
+            new Rectangulo(),
+            new Triangulo()
+        };
+
+        // Dibujar todas las formas
+        for (Forma f : formas) {
+            f.dibujar();
+        }
+    }
+}
