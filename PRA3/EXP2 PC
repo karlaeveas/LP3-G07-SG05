@@ -1,0 +1,38 @@
+package experiencia2;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+//Política flexible: hasta 24h antes del check-in
+public class PoliticaCancelacionFlexible implements PoliticaCancelacion {
+ @Override
+ public boolean puedeCancelar(Reserva reserva) {
+     long horasAnticipacion = ChronoUnit.HOURS.between(LocalDate.now().atStartOfDay(),
+             reserva.getFechaCheckIn().atStartOfDay());
+     return horasAnticipacion >= 24;
+ }
+}
+
+//Política moderada: hasta 72h antes, con penalización del 50%
+public class PoliticaCancelacionModerada implements PoliticaCancelacion {
+ @Override
+ public boolean puedeCancelar(Reserva reserva) {
+     long horasAnticipacion = ChronoUnit.HOURS.between(LocalDate.now().atStartOfDay(),
+             reserva.getFechaCheckIn().atStartOfDay());
+     if (horasAnticipacion >= 72) {
+         return true;
+     } else {
+         System.out.println("Cancelación con penalización del 50%.");
+         return true;
+     }
+ }
+}
+
+//Política estricta: no se permite cancelar
+public class PoliticaCancelacionEstricta implements PoliticaCancelacion {
+ @Override
+ public boolean puedeCancelar(Reserva reserva) {
+     System.out.println("No se permite cancelar esta reserva.");
+     return false;
+ }
+}
