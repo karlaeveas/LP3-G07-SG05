@@ -1,0 +1,70 @@
+abstract class Habitacion {
+    protected String id;
+    protected boolean ocupada;
+    protected double precio;
+
+    public Habitacion(String id, double precio) {
+        this.id = id;
+        this.precio = precio;
+        this.ocupada = false;
+    }
+
+    public abstract String getDescripcion();
+
+    public void ocupar() {
+        if (ocupada) {
+            System.out.println("La habitación ya está ocupada.");
+        } else {
+            ocupada = true;
+        }
+    }
+
+    public void liberar() {
+        ocupada = false;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + getDescripcion() + " - " + (ocupada ? "Ocupada" : "Libre") + " - $" + precio;
+    }
+}
+
+// Subclases
+class HabitacionIndividual extends Habitacion {
+    public HabitacionIndividual(String id, double precio) {
+        super(id, precio);
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Habitación Individual";
+    }
+}
+
+class HabitacionDoble extends Habitacion {
+    private boolean camaExtra;
+
+    public HabitacionDoble(String id, double precio, boolean camaExtra) {
+        super(id, precio);
+        this.camaExtra = camaExtra;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Habitación Doble" + (camaExtra ? " con cama extra" : "");
+    }
+}
+
+class Suite extends Habitacion {
+    private boolean jacuzzi;
+
+    public Suite(String id, double precio, boolean jacuzzi) {
+        super(id, precio);
+        this.jacuzzi = jacuzzi;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Suite" + (jacuzzi ? " con jacuzzi" : "");
+    }
+}
