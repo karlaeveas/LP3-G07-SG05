@@ -1,1 +1,47 @@
+package banco;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Scanner;
+
+public class ReporteTransacciones {
+
+    // Generar reporte en archivo
+    public static void generarReporte(String nombreArchivo, CuentaBancaria cuenta, List<String> transacciones)
+            throws HistorialVacioException {
+        if (transacciones == null || transacciones.isEmpty()) {
+            throw new HistorialVacioException("No hay transacciones para la cuenta " + cuenta.getNumero());
+        }
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo, true))) {
+            writer.println("==== REPORTE DE CUENTA ====");
+            writer.println("Número de cuenta: " + cuenta.getNumero());
+            writer.println("Titular: " + cuenta.getTitular());
+            writer.println("Saldo final: " + cuenta.getSaldo());
+            writer.println("---- Transacciones ----");
+            for (String t : transacciones) {
+                writer.println(t);
+            }
+            writer.println("=========================\n");
+            System.out.println("Reporte generado en " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println(" Error al escribir en el archivo: " + e.getMessage());
+        }
+    }
+
+    public static void leerReporte(String nombreArchivo) {
+        File file = new File(nombreArchivo);
+        try (Scanner sc = new Scanner(file)) {
+            System.out.println("📖 Contenido del archivo " + nombreArchivo + ":");
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(" Archivo no encontrado: " + nombreArchivo);
+        }
+    }
+}
