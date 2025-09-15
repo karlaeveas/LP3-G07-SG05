@@ -1,65 +1,44 @@
-public class Cuentacredito { 
+package banco;
 
- 
+public class CuentaCredito extends CuentaBancaria {
+    private double limiteCredito;
 
-	public class CuentaCredito extends CuentaBancaria { 
+    public CuentaCredito(String numero, String titular, double saldoInicial, double limiteCredito) {
+        super(numero, titular, saldoInicial);
+        this.limiteCredito = limiteCredito;
+    }
 
-	 private double limiteCredito; 
- 
-	 public CuentaCredito(String numero, String titular, double saldoInicial, double limiteCredito) { 
+    public double getLimiteCredito() { return limiteCredito; }
 
-	 super(numero, titular, saldoInicial); 
+    //  RETIRO con límite de crédito
+    @Override
+    public void retirar(double monto) throws SaldoInsuficienteException, LimiteCreditoExcedidoException {
+        if (monto <= 0) throw new IllegalArgumentException("Monto inválido");
+        
+        //  Permite usar saldo + crédito
+        if (monto > saldo + limiteCredito)
+            throw new LimiteCreditoExcedidoException("El retiro excede el límite de crédito");
+        
+        saldo -= monto; // puede quedar negativo (usando el crédito)
+    }
 
-	 this.limiteCredito = limiteCredito; 
+    //  TRANSFERENCIA con límite de crédito
+    @Override
+    public void transferir(CuentaBancaria destino, double monto) throws SaldoInsuficienteException, LimiteCreditoExcedidoException {
+        if (destino == null) throw new IllegalArgumentException("Cuenta destino inválida");
+        if (monto <= 0) throw new IllegalArgumentException("Monto inválido");
+        
+        // Permite usar saldo + crédito
+        if (monto > saldo + limiteCredito)
+            throw new LimiteCreditoExcedidoException("La transferencia excede el límite de crédito");
+        
+        saldo -= monto; 
+        destino.depositar(monto);
+    }
 
-	 } 
-
-	 public double getLimiteCredito() { return limiteCredito; } 
-
-
-	 @Override 
-
-	 public void retirar(double monto) throws SaldoInsuficienteException, LimiteCreditoExcedidoException { 
-
-	 if (monto <= 0) throw new IllegalArgumentException("Monto inválido"); 
- 
-
-	 if (monto > saldo + limiteCredito) 
-
-	 throw new LimiteCreditoExcedidoException("El retiro excede el límite de crédito"); 
- 
-
-	 saldo -= monto;  
-
-	 } 
-
-	 @Override 
-
-	 public void transferir(CuentaBancaria destino, double monto) throws SaldoInsuficienteException, LimiteCreditoExcedidoException { 
-
-	 if (destino == null) throw new IllegalArgumentException("Cuenta destino inválida"); 
-
-	 if (monto <= 0) throw new IllegalArgumentException("Monto inválido"); 
-
-	
-	 if (monto > saldo + limiteCredito) 
-
-	 throw new LimiteCreditoExcedidoException("La transferencia excede el límite de crédito"); 
-
-	 saldo -= monto;  
-
-	 destino.depositar(monto); 
-
-	 } 
-
-	 @Override 
-
-	 public String toString() { 
-
-	 return "Cuenta Crédito " + getNumero() + " - " + getTitular() +  
-
-	 " - Saldo: " + saldo + " - Límite: " + limiteCredito; 
-
-	 } 
-
-	} 
+    @Override
+    public String toString() {
+        return "Cuenta Crédito " + getNumero() + " - " + getTitular() + 
+               " - Saldo: " + saldo + " - Límite: " + limiteCredito;
+    }
+}
