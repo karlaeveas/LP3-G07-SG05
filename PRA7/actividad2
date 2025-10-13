@@ -1,0 +1,29 @@
+package programasiete;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String cadena;
+
+        // try-with-resources: el archivo se cierra automáticamente al finalizar el bloque
+        try (PrintWriter salida = new PrintWriter("C:/ficheros/datos.txt")) {
+            System.out.println("Introduce texto. Para acabar escribe la palabra FIN:");
+
+            cadena = sc.nextLine();
+            while (!cadena.equalsIgnoreCase("FIN")) { // se repite mientras NO se escriba FIN
+                salida.println(cadena); // escribe la línea en el archivo
+                cadena = sc.nextLine(); // lee la siguiente línea
+            }
+
+            System.out.println("Texto guardado correctamente en 'C:/ficheros/datos.txt'");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}
