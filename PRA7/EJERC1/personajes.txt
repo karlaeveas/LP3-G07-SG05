@@ -1,0 +1,2 @@
+Guerrero,3,5,2,4
+Caballero,4,2,4,2
