@@ -1,0 +1,192 @@
+package pasajes;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CompraPasaje extends JFrame {
+
+    private JTextField txtNombre, txtDNI, txtFecha;
+    private JRadioButton rbPiso1, rbPiso2;
+    private JCheckBox chkAudifonos, chkManta, chkRevistas;
+    private JComboBox<String> cbOrigen, cbDestino;
+    private JList<String> listaServicios;
+    private ButtonGroup grupoPisos;
+
+    public CompraPasaje() {
+
+        setTitle("Compra de Pasajes - Espino/Ramos");
+        setSize(520, 700);
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        // === COLOR VERDE DE FONDO ===
+        getContentPane().setBackground(new Color(180, 240, 180)); // verde suave
+
+        // ETIQUETAS
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setBounds(20, 20, 140, 25);
+        add(lblNombre);
+
+        JLabel lblDNI = new JLabel("DNI:");
+        lblDNI.setBounds(20, 60, 140, 25);
+        add(lblDNI);
+
+        JLabel lblFecha = new JLabel("Fecha de Viaje:");
+        lblFecha.setBounds(20, 100, 140, 25);
+        add(lblFecha);
+
+        JLabel lblPiso = new JLabel("Piso del Bus:");
+        lblPiso.setBounds(20, 150, 140, 25);
+        add(lblPiso);
+
+        JLabel lblServicios = new JLabel("Servicios Opcionales:");
+        lblServicios.setBounds(20, 230, 160, 25);
+        add(lblServicios);
+
+        JLabel lblOrigen = new JLabel("Origen:");
+        lblOrigen.setBounds(20, 330, 140, 25);
+        add(lblOrigen);
+
+        JLabel lblDestino = new JLabel("Destino:");
+        lblDestino.setBounds(20, 370, 140, 25);
+        add(lblDestino);
+
+        JLabel lblTipo = new JLabel("Tipo de Servicio:");
+        lblTipo.setBounds(20, 420, 150, 25);
+        add(lblTipo);
+        
+        // CAMPOS DE TEXTO
+        txtNombre = new JTextField();
+        txtNombre.setBounds(180, 20, 300, 25);
+        add(txtNombre);
+
+        txtDNI = new JTextField();
+        txtDNI.setBounds(180, 60, 300, 25);
+        add(txtDNI);
+
+        txtFecha = new JTextField();
+        txtFecha.setBounds(180, 100, 300, 25);
+        add(txtFecha);
+
+        // CASILLAS DE VERIFICACIÓN
+        chkAudifonos = new JCheckBox("Audífonos");
+        chkAudifonos.setBounds(180, 230, 150, 25);
+        chkAudifonos.setBackground(new Color(180, 240, 180));
+        add(chkAudifonos);
+
+        chkManta = new JCheckBox("Manta");
+        chkManta.setBounds(180, 260, 150, 25);
+        chkManta.setBackground(new Color(180, 240, 180));
+        add(chkManta);
+
+        chkRevistas = new JCheckBox("Revistas");
+        chkRevistas.setBounds(180, 290, 150, 25);
+        chkRevistas.setBackground(new Color(180, 240, 180));
+        add(chkRevistas);
+
+        // BOTONES DE OPCIÓN (PISOS)
+        rbPiso1 = new JRadioButton("1er Piso");
+        rbPiso1.setBounds(180, 150, 120, 25);
+        rbPiso1.setBackground(new Color(180, 240, 180));
+        add(rbPiso1);
+
+        rbPiso2 = new JRadioButton("2do Piso");
+        rbPiso2.setBounds(300, 150, 120, 25);
+        rbPiso2.setBackground(new Color(180, 240, 180));
+        add(rbPiso2);
+
+        grupoPisos = new ButtonGroup();
+        grupoPisos.add(rbPiso1);
+        grupoPisos.add(rbPiso2);
+
+        // CUADROS COMBINADOS
+        String[] ciudades = {"Arequipa", "Lima", "Cusco", "Tacna", "Puno"};
+
+        cbOrigen = new JComboBox<>(ciudades);
+        cbOrigen.setBounds(180, 330, 300, 25);
+        add(cbOrigen);
+
+        cbDestino = new JComboBox<>(ciudades);
+        cbDestino.setBounds(180, 370, 300, 25);
+        add(cbDestino);
+
+        // LISTA (TIPO DE SERVICIO)
+        String[] servicios = {"Económico", "Standard", "VIP"};
+        listaServicios = new JList<>(servicios);
+        listaServicios.setBounds(180, 420, 300, 80);
+        add(listaServicios);
+        
+        // BOTONES 
+        JButton btnMostrar = new JButton("Mostrar Resumen");
+        btnMostrar.setBounds(80, 540, 160, 40);
+        btnMostrar.setBackground(new Color(120, 200, 120));
+        add(btnMostrar);
+
+        JButton btnReiniciar = new JButton("Reiniciar");
+        btnReiniciar.setBounds(260, 540, 160, 40);
+        btnReiniciar.setBackground(new Color(120, 200, 120));
+        add(btnReiniciar);
+
+        // EVENTOS
+        btnMostrar.addActionListener(e -> mostrarResumen());
+        btnReiniciar.addActionListener(e -> limpiarCampos());
+    }
+    // MÉTODO: MOSTRAR RESUMEN
+    private void mostrarResumen() {
+
+        String nombre = txtNombre.getText();
+        String dni = txtDNI.getText();
+        String fecha = txtFecha.getText();
+
+        String piso = rbPiso1.isSelected() ? "1er Piso" :
+                      rbPiso2.isSelected() ? "2do Piso" : "No seleccionado";
+
+        String servicios = "";
+        if (chkAudifonos.isSelected()) servicios += "Audífonos ";
+        if (chkManta.isSelected()) servicios += "Manta ";
+        if (chkRevistas.isSelected()) servicios += "Revistas ";
+        if (servicios.isEmpty()) servicios = "Ninguno";
+
+        String origen = cbOrigen.getSelectedItem().toString();
+        String destino = cbDestino.getSelectedItem().toString();
+
+        String tipoServicio = listaServicios.getSelectedValue();
+        if (tipoServicio == null) tipoServicio = "No seleccionado";
+
+        String resumen =
+                "---- RESUMEN DEL PASAJE ----\n\n" +
+                "Nombre: " + nombre + "\n" +
+                "DNI: " + dni + "\n" +
+                "Fecha de viaje: " + fecha + "\n" +
+                "Piso: " + piso + "\n" +
+                "Servicios opcionales: " + servicios + "\n" +
+                "Origen: " + origen + "\n" +
+                "Destino: " + destino + "\n" +
+                "Tipo de servicio: " + tipoServicio;
+
+        JOptionPane.showMessageDialog(this, resumen,
+                "Resumen del Pasaje", JOptionPane.INFORMATION_MESSAGE);
+    }
+    // MÉTODO: LIMPIAR CAMPOS
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtDNI.setText("");
+        txtFecha.setText("");
+
+        grupoPisos.clearSelection();
+
+        chkAudifonos.setSelected(false);
+        chkManta.setSelected(false);
+        chkRevistas.setSelected(false);
+
+        cbOrigen.setSelectedIndex(0);
+        cbDestino.setSelectedIndex(0);
+
+        listaServicios.clearSelection();
+    }
+    // MAIN
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new CompraPasaje().setVisible(true));
+    }
+}
